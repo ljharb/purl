@@ -1,0 +1,17 @@
+{
+  "author": "purl.re <purl@purl.re> (purl.re)",
+  "name": "purl",
+  "description": "purl Reunion (Full Translations)",
+  "version": "0.0.1",
+  "homepage": "purl.re",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "main": "index.js",
+  "repository": {
+    "url": "purl.re"
+  }
+}
