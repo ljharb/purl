@@ -1,0 +1,29 @@
+{
+	"name": "purl",
+	"version": "1.0.4",
+	"description": "a PURL ( https://tc54.org/purl/ ) parser and serializer",
+	"main": "index.js",
+	"exports": {
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ljharb/purl.git"
+	},
+	"keywords": [
+		"purl",
+		"package url",
+		"package",
+		"url",
+		"ecma-427"
+	],
+	"author": "Jordan Harband <ljharb@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ljharb/purl/issues"
+	},
+	"homepage": "https://github.com/ljharb/purl#readme"
+}
