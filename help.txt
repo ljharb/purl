@@ -1,0 +1,30 @@
+purl - Package URL (PURL) parser and converter
+
+Usage:
+  purl [options] <input>
+
+Arguments:
+  input    An npm package specifier or PURL string
+
+Options:
+  --check, -c    Validate the package exists on its registry and show latest version
+  --json         Output only JSON to stdout (no colored PURL output)
+  --help         Show this help message
+  --version      Show version number
+
+Behavior:
+  - If input is a valid PURL string, outputs the normalized PURL on stdout
+  - If input is an npm package specifier, converts it to a PURL and outputs on stdout
+  - Parse information (including package URL if available) is output on stderr as JSON
+  - With --json, outputs only JSON to stdout (useful for scripting)
+  - Exit code 1 if input is invalid or validation fails
+
+Examples:
+  purl lodash@4.17.21           # outputs pkg:npm/lodash@4.17.21
+  purl @babel/core@7.0.0        # outputs pkg:npm/%40babel/core@7.0.0
+  purl express                  # outputs pkg:npm/express
+  purl 'pkg:pypi/requests@2.28' # outputs pkg:pypi/requests@2.28
+  purl -c lodash@4.17.21        # validates package exists, then outputs PURL
+
+Supported registry checks (--check):
+  npm, pypi, gem, cargo, nuget, hex, maven, composer, pub, hackage, cocoapods
