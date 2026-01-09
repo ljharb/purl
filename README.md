@@ -238,6 +238,11 @@ supportedTypes; // ['npm', 'pypi', 'gem', 'cargo', 'nuget', 'hex', 'maven', 'com
 
 Clone the repo, `npm install`, and run `npm test`.
 
+## Versions before v2
+
+Prior to v2, `purl` was a different package.
+v0 was just a placeholder, but v1 can be found both on [archive.org](https://web.archive.org/web/20201029170451/https://github.com/intuitivcloud/purl) and on the [original](https://github.com/ljharb/purl/tree/original) branch of this repo.
+
 [package-url]: https://npmjs.org/package/purl
 [npm-version-svg]: https://versionbadg.es/ljharb/purl.svg
 [npm-badge-png]: https://nodei.co/npm/purl.png?downloads=true&stars=true
