@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.0](https://github.com/ljharb/purl/compare/v1.0.4...v2.0.0) - 2026-01-08
+
+### Commits
+
+- [Breaking] complete reimplementation [`b88c079`](https://github.com/ljharb/purl/commit/b88c079d0d56e0f061f8d2b6a1df71e355587e7c)
+- Initial commit [`d53d0a0`](https://github.com/ljharb/purl/commit/d53d0a0cf2763c27dd19eb0e9ad62451f78384f4)
+- npm init [`2ba41d2`](https://github.com/ljharb/purl/commit/2ba41d2b0b1edcb030122f945651dccb20ca671e)
+- Only apps should have lockfiles [`7c72917`](https://github.com/ljharb/purl/commit/7c72917bfc1e557ec63d406250533f3b4d0fc192)
+- [readme] add note about pre-v2 versions [`9ce1e9b`](https://github.com/ljharb/purl/commit/9ce1e9bbfca6810ee318f074d66fb865b6ce756a)
+- [meta] add missing npmrc settings [`92056e3`](https://github.com/ljharb/purl/commit/92056e32e5685edfbbb2c807fb87c1fe49313c2d)
+
 ## [v1.0.4](https://github.com/ljharb/purl/compare/v1.0.3...v1.0.4) - 2015-08-18
 
 ### Merged
