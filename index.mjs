@@ -26,3 +26,26 @@ export { default as fromNPM } from './from-npm.mjs';
 // Registry functions
 export { default as url } from './url.mjs';
 export { default as validate, supportedTypes as validateTypes } from './validate.mjs';
+
+// Type information from purl-types.json
+export {
+	specVersion,
+	specSource,
+	specLastUpdated,
+	knownTypes,
+	isKnownType,
+	getTypeInfo,
+	getTypeDescription,
+	getDefaultRegistry,
+	getNsRequirement,
+	requiresNamespace,
+	prohibitsNamespace,
+	getExamples,
+	getRegistryConfig,
+	regConfigTypes,
+	nsRequiredTypes,
+	nsProhibitedTypes,
+	defRegistryTypes,
+	getAllTypeInfo,
+	checkNamespace,
+} from './types.mjs';

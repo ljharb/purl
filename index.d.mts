@@ -31,3 +31,32 @@ export {
 	ValidationSuccess,
 	ValidationError,
 } from './validate.mjs';
+
+// Type information from purl-types.json
+export {
+	specVersion,
+	specSource,
+	specLastUpdated,
+	knownTypes,
+	isKnownType,
+	getTypeInfo,
+	getTypeDescription,
+	getDefaultRegistry,
+	getNsRequirement,
+	requiresNamespace,
+	prohibitsNamespace,
+	getExamples,
+	getRegistryConfig,
+	regConfigTypes,
+	nsRequiredTypes,
+	nsProhibitedTypes,
+	defRegistryTypes,
+	getAllTypeInfo,
+	checkNamespace,
+	NamespaceRequirement,
+	PURLRegistryConfig,
+	PURLRegistryComponents,
+	PURLTypeInfo,
+	PURLTypeRaw,
+	PURLTypesData,
+} from './types.mjs';

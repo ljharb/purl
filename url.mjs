@@ -1,74 +1,60 @@
+/** @import { PURLRegistryConfig } from './types.mjs' */
+
 import PURL from './purl.mjs';
+import { getRegistryConfig } from './types.mjs';
 
 /**
- * Get npm package webpage URL.
+ * Generate URL from registry config uri_template.
+ * @param {PURLRegistryConfig} config - Registry configuration
  * @param {PURL} purl - The PURL
- * @returns {string} The package URL
+ * @returns {string} Generated URL
  */
-function getNPMURL(purl) {
+function generateFromTemplate(config, purl) {
 	const {
 		name,
 		namespace,
 		version,
 	} = purl;
-	const pkgPath = namespace ? `${namespace}/${name}` : name;
-	const base = `https://www.npmjs.com/package/${pkgPath}`;
-	return version ? `${base}/v/${version}` : base;
+	const { components } = config;
+	const hasNamespace = namespace !== null;
+	const hasVersion = version !== null;
+	const supportsNamespace = components.namespace !== false;
+
+	let template;
+
+	if (hasVersion && config.uri_template_with_version) {
+		// Use version template if PURL has namespace, OR if type doesn't support namespace
+		if (hasNamespace || !supportsNamespace) {
+			template = config.uri_template_with_version;
+		} else if (config.uri_template_with_version_no_namespace) {
+			// Type supports namespace but PURL doesn't have one
+			template = config.uri_template_with_version_no_namespace;
+		}
+	}
+
+	if (!template) {
+		if (!hasNamespace && config.uri_template_no_namespace) {
+			template = config.uri_template_no_namespace;
+		} else {
+			template = config.uri_template;
+		}
+	}
+
+	let result = template
+		.replace(/\{name\}/g, name)
+		.replace(/\{namespace\}/g, namespace || '');
+
+	if (hasVersion) {
+		result = result.replace(/\{version\}/g, version);
+	} else if (components.default_version) {
+		result = result.replace(/\{version\}/g, components.default_version);
+	}
+
+	return result;
 }
 
 /**
- * Get PyPI package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getPyPIURL(purl) {
-	const { name, version } = purl;
-	const base = `https://pypi.org/project/${name}`;
-	return version ? `${base}/${version}/` : `${base}/`;
-}
-
-/**
- * Get RubyGems package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getGemURL(purl) {
-	const { name, version } = purl;
-	return `https://rubygems.org/gems/${name}${version ? `/versions/${version}` : ''}`;
-}
-
-/**
- * Get crates.io package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getCargoURL(purl) {
-	const { name, version } = purl;
-	return `https://crates.io/crates/${name}${version ? `/${version}` : ''}`;
-}
-
-/**
- * Get NuGet package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getNuGetURL(purl) {
-	const { name, version } = purl;
-	return `https://www.nuget.org/packages/${name}${version ? `/${version}` : ''}`;
-}
-
-/**
- * Get Hex.pm package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getHexURL(purl) {
-	const { name, version } = purl;
-	return `https://hex.pm/packages/${name}${version ? `/${version}` : ''}`;
-}
-
-/**
- * Get pkg.go.dev package webpage URL.
+ * Get golang package webpage URL (special handling for import paths).
  * @param {PURL} purl - The PURL
  * @returns {string} The package URL
  */
@@ -83,76 +69,21 @@ function getGolangURL(purl) {
 }
 
 /**
- * Get Maven package webpage URL.
+ * Get Maven package webpage URL (special handling for artifact type).
  * @param {PURL} purl - The PURL
  * @returns {string} The package URL
  */
 function getMavenURL(purl) {
 	const {
-		name: artifactID,
+		name,
 		namespace,
 		qualifiers,
 		version,
 	} = purl;
 	const groupID = namespace || '';
 	const ext = qualifiers?.type || 'jar';
-	return `https://search.maven.org/artifact/${groupID}/${artifactID}${version ? `/${version}/${ext}` : ''}`;
-}
-
-/**
- * Get Packagist package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getComposerURL(purl) {
-	const {
-		name,
-		namespace: vendor,
-	} = purl;
-	return `https://packagist.org/packages/${vendor || ''}/${name}`;
-}
-
-/**
- * Get CocoaPods package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getCocoapodsURL(purl) {
-	return `https://cocoapods.org/pods/${purl.name}`;
-}
-
-/**
- * Get pub.dev package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getPubURL(purl) {
-	const { name, version } = purl;
-	return `https://pub.dev/packages/${name}${version ? `/versions/${version}` : ''}`;
-}
-
-/**
- * Get Hackage package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string} The package URL
- */
-function getHackageURL(purl) {
-	const { name, version } = purl;
-	return `https://hackage.haskell.org/package/${name}${version ? `-${version}` : ''}`;
-}
-
-/**
- * Get Swift package webpage URL.
- * @param {PURL} purl - The PURL
- * @returns {string | null} The package URL or null if not available
- */
-function getSwiftURL(purl) {
-	const {
-		name,
-		namespace,
-	} = purl;
-	// Swift packages are typically GitHub repos
-	return namespace ? `https://github.com/${namespace}/${name}` : null;
+	const base = `https://search.maven.org/artifact/${groupID}/${name}`;
+	return version ? `${base}/${version}/${ext}` : base;
 }
 
 /**
@@ -166,7 +97,8 @@ function getGitHubURL(purl) {
 		namespace,
 		version,
 	} = purl;
-	return `https://github.com/${namespace || ''}/${name}${version ? `/tree/${version}` : ''}`;
+	const base = `https://github.com/${namespace || ''}/${name}`;
+	return version ? `${base}/tree/${version}` : base;
 }
 
 /**
@@ -180,7 +112,8 @@ function getBitbucketURL(purl) {
 		namespace,
 		version,
 	} = purl;
-	return `https://bitbucket.org/${namespace || ''}/${name}${version ? `/src/${version}` : ''}`;
+	const base = `https://bitbucket.org/${namespace || ''}/${name}`;
+	return version ? `${base}/src/${version}` : base;
 }
 
 /**
@@ -194,30 +127,31 @@ function getDockerURL(purl) {
 		namespace,
 		version,
 	} = purl;
+	const versionSuffix = version ? `?tab=tags&name=${version}` : '';
 	if (namespace === 'library' || !namespace) {
-		return `https://hub.docker.com/_/${name}${version ? `?tab=tags&name=${version}` : ''}`;
+		return `https://hub.docker.com/_/${name}${versionSuffix}`;
 	}
-	return `https://hub.docker.com/r/${namespace}/${name}${version ? `?tab=tags&name=${version}` : ''}`;
+	return `https://hub.docker.com/r/${namespace}/${name}${versionSuffix}`;
+}
+
+/**
+ * Get Swift package webpage URL (GitHub-based).
+ * @param {PURL} purl - The PURL
+ * @returns {string | null} The package URL or null if no namespace
+ */
+function getSwiftURL(purl) {
+	const { name, namespace } = purl;
+	return namespace ? `https://github.com/${namespace}/${name}` : null;
 }
 
 /** @type {Record<string, (purl: PURL) => string | null>} */
-const urlGenerators = {
+const specialHandlers = {
 	__proto__: null,
 	bitbucket: getBitbucketURL,
-	cargo: getCargoURL,
-	cocoapods: getCocoapodsURL,
-	composer: getComposerURL,
 	docker: getDockerURL,
-	gem: getGemURL,
 	github: getGitHubURL,
 	golang: getGolangURL,
-	hackage: getHackageURL,
-	hex: getHexURL,
 	maven: getMavenURL,
-	npm: getNPMURL,
-	nuget: getNuGetURL,
-	pub: getPubURL,
-	pypi: getPyPIURL,
 	swift: getSwiftURL,
 };
 
@@ -228,6 +162,52 @@ const urlGenerators = {
  */
 export default function url(input) {
 	const purl = new PURL(input);
-	const generator = urlGenerators[purl.type];
-	return generator ? generator(purl) : null;
+	const { type } = purl;
+
+	// Check for special handlers first
+	const specialHandler = specialHandlers[type];
+	if (specialHandler) {
+		return specialHandler(purl);
+	}
+
+	// Use registry_config from purl-types.json
+	const config = getRegistryConfig(type);
+	if (config) {
+		return generateFromTemplate(config, purl);
+	}
+
+	return null;
 }
+
+/**
+ * List of PURL types that support URL generation.
+ * @type {string[]}
+ */
+export const supportedUrlTypes = [
+	'bioconductor',
+	'bitbucket',
+	'cargo',
+	'clojars',
+	'cocoapods',
+	'composer',
+	'conan',
+	'conda',
+	'cpan',
+	'deno',
+	'docker',
+	'elm',
+	'gem',
+	'github',
+	'golang',
+	'hackage',
+	'hex',
+	'homebrew',
+	'huggingface',
+	'luarocks',
+	'maven',
+	'npm',
+	'nuget',
+	'pub',
+	'pypi',
+	'swift',
+];

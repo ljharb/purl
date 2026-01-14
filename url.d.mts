@@ -8,4 +8,9 @@ import type { PURLString } from './purl.mjs';
  */
 declare function url(input: PURL | PURLString | string): string | null;
 
+/**
+ * List of PURL types that support URL generation.
+ */
+export const supportedUrlTypes: readonly string[];
+
 export default url;

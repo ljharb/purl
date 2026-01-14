@@ -1,0 +1,3 @@
+[submodule "vendor/purl-spec"]
+	path = vendor/purl-spec
+	url = https://github.com/andrew/purl.git
