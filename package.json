@@ -1,6 +1,6 @@
 {
 	"name": "purl",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "a PURL ( https://tc54.org/purl/ ) parser and serializer",
 	"main": "./index.mjs",
 	"exports": {
