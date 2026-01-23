@@ -129,6 +129,15 @@ test('url function - chrome', (t) => {
 	t.end();
 });
 
+test('url function - vscode', (t) => {
+	t.equal(url('pkg:vscode/ms-python/python'), 'https://marketplace.visualstudio.com/items?itemName=ms-python.python', 'vscode extension URL');
+	t.equal(url('pkg:vscode/esbenp/prettier-vscode@10.1.0'), 'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode', 'vscode extension with version (no version URL)');
+	const purlNoNs = new PURL({ name: 'python', type: 'vscode' });
+	// vscode namespace is required, but URL generation should still work
+	t.equal(url(purlNoNs), 'https://marketplace.visualstudio.com/items?itemName=.python', 'vscode extension without namespace');
+	t.end();
+});
+
 test('url function - additional registry_config types', (t) => {
 	// bioconductor
 	t.equal(url('pkg:bioconductor/GenomicRanges'), 'https://bioconductor.org/packages/GenomicRanges', 'bioconductor package URL');

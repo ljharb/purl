@@ -185,6 +185,7 @@ test('types module - requiresNamespace', (t) => {
 	t.ok(requiresNamespace('maven'), 'maven requires namespace');
 	t.ok(requiresNamespace('composer'), 'composer requires namespace');
 	t.ok(requiresNamespace('swift'), 'swift requires namespace');
+	t.ok(requiresNamespace('vscode'), 'vscode requires namespace');
 
 	t.notOk(requiresNamespace('npm'), 'npm does not require namespace');
 	t.notOk(requiresNamespace('gem'), 'gem does not require namespace');
@@ -449,8 +450,8 @@ test('types module - checkNamespace', (t) => {
 });
 
 test('types module - comprehensive type coverage', (t) => {
-	// Verify all 38 known types are properly configured
-	t.equal(knownTypes.length, 38, 'exactly 38 known types');
+	// Verify all 39 known types are properly configured
+	t.equal(knownTypes.length, 39, 'exactly 39 known types');
 
 	const expectedTypes = [
 		'alpm',
@@ -491,6 +492,7 @@ test('types module - comprehensive type coverage', (t) => {
 		'rpm',
 		'swid',
 		'swift',
+		'vscode',
 	];
 
 	t.deepEqual(knownTypes, expectedTypes, 'all expected types present and sorted');

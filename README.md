@@ -220,7 +220,7 @@ url('pkg:github/ljharb/qs@6.11.0');  // 'https://github.com/ljharb/qs/tree/6.11.
 
 #### Supported URL Types
 
-bioconductor, bitbucket, cargo, chrome, clojars, cocoapods, composer, conan, conda, cpan, deno, docker, elm, gem, github, golang, hackage, hex, homebrew, huggingface, luarocks, maven, npm, nuget, pub, pypi, swift
+bioconductor, bitbucket, cargo, chrome, clojars, cocoapods, composer, conan, conda, cpan, deno, docker, elm, gem, github, golang, hackage, hex, homebrew, huggingface, luarocks, maven, npm, nuget, pub, pypi, swift, vscode
 
 ### `validate(purl)`
 

@@ -211,4 +211,5 @@ export const supportedUrlTypes = [
 	'pub',
 	'pypi',
 	'swift',
+	'vscode',
 ];
