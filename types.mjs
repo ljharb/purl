@@ -17,6 +17,47 @@ const purlTypesData = require('./vendor/purl-spec/purl-types.json');
 const { fromEntries } = Object;
 
 /**
+ * Additional types not yet in the official purl-types.json.
+ * These will be merged with the official types.
+ * @type {Record<string, import('./types.mjs').PURLTypeRawInfo>}
+ */
+// eslint-disable-next-line sort-keys -- match purl-types.json structure
+const additionalTypes = {
+	__proto__: null,
+	// See https://github.com/package-url/purl-spec/pull/522
+	chrome: {
+		// eslint-disable-next-line camelcase, sort-keys -- match purl-types.json structure
+		default_registry: 'https://chromewebstore.google.com',
+		description: 'Chrome Web Store browser extensions',
+		examples: [
+			'pkg:chrome/cjpalhdlnbpafiamejdnhcphjbkeiagm',
+			'pkg:chrome/nkbihfbeogaeaoehlefnkodbefgpgknn@11.16.16',
+			'pkg:chrome/gighmmpiobklfepjocnamgkkbiglidom@6.4.0',
+		],
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		namespace_requirement: 'prohibited',
+		// eslint-disable-next-line camelcase, sort-keys -- match purl-types.json structure
+		registry_config: {
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			base_url: 'https://chromewebstore.google.com/detail',
+			// eslint-disable-next-line sort-keys -- match purl-types.json structure
+			components: {
+				namespace: false,
+				// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+				version_in_url: false,
+			},
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			reverse_regex: '^https://chromewebstore\\.google\\.com/detail/(?:[^/]+/)?([^/?#]+)',
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			uri_template: 'https://chromewebstore.google.com/detail/{name}',
+		},
+	},
+};
+
+/** @type {Record<string, import('./types.mjs').PURLTypeRawInfo>} */
+const allTypes = { ...purlTypesData.types, ...additionalTypes };
+
+/**
  * The version of the purl-types specification.
  * @type {string}
  */
@@ -35,10 +76,10 @@ export const specSource = purlTypesData.source;
 export const specLastUpdated = purlTypesData.last_updated;
 
 /**
- * List of all known PURL types from the official specification.
+ * List of all known PURL types (official specification plus additional types).
  * @type {string[]}
  */
-export const knownTypes = Object.keys(purlTypesData.types).toSorted();
+export const knownTypes = Object.keys(allTypes).toSorted();
 
 /**
  * Check if a type is a known/official PURL type.
@@ -46,7 +87,7 @@ export const knownTypes = Object.keys(purlTypesData.types).toSorted();
  * @returns {boolean} True if the type is known
  */
 export function isKnownType(type) {
-	return typeof type === 'string' && type in purlTypesData.types;
+	return typeof type === 'string' && type in allTypes;
 }
 
 /**
@@ -58,7 +99,7 @@ export function getTypeInfo(type) {
 	if (!isKnownType(type)) {
 		return null;
 	}
-	const { [type]: info } = purlTypesData.types;
+	const { [type]: info } = allTypes;
 	return {
 		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
 		default_registry: info.default_registry ?? null,
@@ -139,7 +180,7 @@ export function getRegistryConfig(type) {
  * @returns {string[]} Array of type names with registry configs
  */
 export function regConfigTypes() {
-	return knownTypes.filter((type) => purlTypesData.types[type].registry_config !== undefined);
+	return knownTypes.filter((type) => allTypes[type].registry_config !== undefined);
 }
 
 /**
@@ -147,7 +188,7 @@ export function regConfigTypes() {
  * @returns {string[]} Array of type names that require namespace
  */
 export function nsRequiredTypes() {
-	return knownTypes.filter((type) => purlTypesData.types[type].namespace_requirement === 'required');
+	return knownTypes.filter((type) => allTypes[type].namespace_requirement === 'required');
 }
 
 /**
@@ -155,7 +196,7 @@ export function nsRequiredTypes() {
  * @returns {string[]} Array of type names that prohibit namespace
  */
 export function nsProhibitedTypes() {
-	return knownTypes.filter((type) => purlTypesData.types[type].namespace_requirement === 'prohibited');
+	return knownTypes.filter((type) => allTypes[type].namespace_requirement === 'prohibited');
 }
 
 /**
@@ -164,7 +205,7 @@ export function nsProhibitedTypes() {
  */
 export function defRegistryTypes() {
 	return knownTypes.filter((type) => {
-		const reg = purlTypesData.types[type].default_registry;
+		const reg = allTypes[type].default_registry;
 		return reg !== null && reg !== undefined;
 	});
 }

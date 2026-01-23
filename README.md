@@ -218,6 +218,10 @@ url('pkg:pypi/requests@2.28.0');     // 'https://pypi.org/project/requests/2.28.
 url('pkg:github/ljharb/qs@6.11.0');  // 'https://github.com/ljharb/qs/tree/6.11.0'
 ```
 
+#### Supported URL Types
+
+bioconductor, bitbucket, cargo, chrome, clojars, cocoapods, composer, conan, conda, cpan, deno, docker, elm, gem, github, golang, hackage, hex, homebrew, huggingface, luarocks, maven, npm, nuget, pub, pypi, swift
+
 ### `validate(purl)`
 
 Validate a PURL against its package registry. Returns a promise.

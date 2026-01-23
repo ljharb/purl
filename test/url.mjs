@@ -122,6 +122,13 @@ test('url function - docker (special handler)', (t) => {
 	t.end();
 });
 
+test('url function - chrome', (t) => {
+	t.equal(url('pkg:chrome/cjpalhdlnbpafiamejdnhcphjbkeiagm'), 'https://chromewebstore.google.com/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm', 'chrome extension URL');
+	// Chrome Web Store doesn't support version in URL
+	t.equal(url('pkg:chrome/cjpalhdlnbpafiamejdnhcphjbkeiagm@1.0.0'), 'https://chromewebstore.google.com/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm', 'chrome extension with version (no version URL)');
+	t.end();
+});
+
 test('url function - additional registry_config types', (t) => {
 	// bioconductor
 	t.equal(url('pkg:bioconductor/GenomicRanges'), 'https://bioconductor.org/packages/GenomicRanges', 'bioconductor package URL');

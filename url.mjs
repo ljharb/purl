@@ -187,6 +187,7 @@ export const supportedUrlTypes = [
 	'bioconductor',
 	'bitbucket',
 	'cargo',
+	'chrome',
 	'clojars',
 	'cocoapods',
 	'composer',
