@@ -220,7 +220,9 @@ url('pkg:github/ljharb/qs@6.11.0');  // 'https://github.com/ljharb/qs/tree/6.11.
 
 #### Supported URL Types
 
-bioconductor, bitbucket, cargo, chrome, clojars, cocoapods, composer, conan, conda, cpan, deno, docker, elm, gem, github, golang, hackage, hex, homebrew, huggingface, luarocks, maven, npm, nuget, pub, pypi, swift, vscode
+bioconductor, bitbucket, cargo, chrome-extension, clojars, cocoapods, composer, conan, conda, cpan, deno, docker, elm, gem, github, golang, hackage, hex, homebrew, huggingface, luarocks, maven, npm, nuget, pub, pypi, swift, vscode-extension
+
+The deprecated aliases `chrome` (for `chrome-extension`) and `vscode` (for `vscode-extension`) are still recognized; they will be removed in a future major version.
 
 ### `validate(purl)`
 
