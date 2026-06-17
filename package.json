@@ -150,5 +150,8 @@
 			"vendor/purl-spec/**",
 			"!vendor/purl-spec/purl-types.json"
 		]
+	},
+	"overrides": {
+		"yargs": "17.7.3-candidate.0"
 	}
 }
