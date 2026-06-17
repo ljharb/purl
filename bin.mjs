@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import pargs from 'pargs';
-import pkg from './package.json' with { type: 'json' };
 
 const {
 	help,
@@ -9,29 +8,43 @@ const {
 	positionals: [input],
 } = await pargs(import.meta.filename, {
 	allowPositionals: 1,
+	description: {
+		examples: [
+			{ command: 'purl lodash@4.17.21', description: 'outputs pkg:npm/lodash@4.17.21' },
+			{ command: 'purl @babel/core@7.0.0', description: 'outputs pkg:npm/%40babel/core@7.0.0' },
+			{ command: 'purl express', description: 'outputs pkg:npm/express' },
+			{ command: "purl 'pkg:pypi/requests@2.28'", description: 'outputs pkg:pypi/requests@2.28' },
+			{ command: 'purl -c lodash@4.17.21', description: 'validates package exists, then outputs PURL' },
+		],
+		sections: [
+			{
+				body: '- If input is a valid PURL string, outputs the normalized PURL on stdout\n- If input is an npm package specifier, converts it to a PURL and outputs on stdout\n- Parse information (including package URL if available) is output on stderr as JSON\n- With --json, outputs only JSON to stdout (useful for scripting)\n- Exit code 1 if input is invalid or validation fails',
+				title: 'Behavior',
+			},
+			{
+				body: 'npm, pypi, gem, cargo, nuget, hex, maven, composer, pub, hackage, cocoapods',
+				title: 'Supported registry checks (--check)',
+			},
+		],
+		summary: 'purl - Package URL (PURL) parser and converter',
+	},
 	options: {
 		check: {
 			default: false,
+			description: 'Validate the package exists on its registry and show latest version',
 			short: 'c',
 			type: 'boolean',
 		},
 		json: {
 			default: false,
-			type: 'boolean',
-		},
-		version: {
-			default: false,
+			description: 'Output only JSON to stdout (no colored PURL output)',
 			type: 'boolean',
 		},
 	},
+	positionals: [{ description: 'An npm package specifier or PURL string', name: 'input' }],
 });
 
 await help();
-
-if (values.version) {
-	console.log(`v${pkg.version}`);
-	process.exit(0);
-}
 
 import { styleText } from 'util';
 
