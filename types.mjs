@@ -16,64 +16,6 @@ const purlTypesData = require('./vendor/purl-spec/purl-types.json');
 
 const { fromEntries } = Object;
 
-/** @type {import('./types.mjs').PURLTypeRawInfo} */
-const chromeExtensionInfo = {
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	default_registry: 'https://chromewebstore.google.com',
-	description: 'Chrome Web Store browser extensions',
-	examples: [
-		'pkg:chrome-extension/cjpalhdlnbpafiamejdnhcphjbkeiagm',
-		'pkg:chrome-extension/nkbihfbeogaeaoehlefnkodbefgpgknn@11.16.16',
-		'pkg:chrome-extension/gighmmpiobklfepjocnamgkkbiglidom@6.4.0',
-	],
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	namespace_requirement: 'prohibited',
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	registry_config: {
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		base_url: 'https://chromewebstore.google.com/detail',
-		components: {
-			namespace: false,
-			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-			version_in_url: false,
-		},
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		reverse_regex: '^https://chromewebstore\\.google\\.com/detail/(?:[^/]+/)?([^/?#]+)',
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		uri_template: 'https://chromewebstore.google.com/detail/{name}',
-	},
-};
-
-/** @type {import('./types.mjs').PURLTypeRawInfo} */
-const vscodeExtensionInfo = {
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	default_registry: 'https://marketplace.visualstudio.com',
-	description: 'Visual Studio Code extensions distributed via the VS Code Marketplace or alternative registries like OpenVSX',
-	examples: [
-		'pkg:vscode-extension/ms-python/python@2024.0.1',
-		'pkg:vscode-extension/esbenp/prettier-vscode@10.1.0',
-		'pkg:vscode-extension/dbaeumer/vscode-eslint@2.4.2',
-	],
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	namespace_requirement: 'required',
-	// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-	registry_config: {
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		base_url: 'https://marketplace.visualstudio.com/items',
-		components: {
-			namespace: true,
-			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-			namespace_required: true,
-			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-			version_in_url: false,
-		},
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		reverse_regex: '^https://marketplace\\.visualstudio\\.com/items\\?itemName=([^./?#]+)\\.([^/?#]+)',
-		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
-		uri_template: 'https://marketplace.visualstudio.com/items?itemName={namespace}.{name}',
-	},
-};
-
 /**
  * Additional types not yet in the official purl-types.json.
  * These will be merged with the official types.
@@ -81,28 +23,62 @@ const vscodeExtensionInfo = {
  */
 const additionalTypes = {
 	__proto__: null,
-	// TODO [semver-major]: remove `chrome` alias; the spec settled on `chrome-extension`.
-	chrome: {
-		...chromeExtensionInfo,
-		examples: [
-			'pkg:chrome/cjpalhdlnbpafiamejdnhcphjbkeiagm',
-			'pkg:chrome/nkbihfbeogaeaoehlefnkodbefgpgknn@11.16.16',
-			'pkg:chrome/gighmmpiobklfepjocnamgkkbiglidom@6.4.0',
-		],
-	},
 	// See https://github.com/package-url/purl-spec/pull/522 (merged 2026-04-03).
-	'chrome-extension': chromeExtensionInfo,
-	// TODO [semver-major]: remove `vscode` alias; the spec settled on `vscode-extension`.
-	vscode: {
-		...vscodeExtensionInfo,
+	'chrome-extension': {
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		default_registry: 'https://chromewebstore.google.com',
+		description: 'Chrome Web Store browser extensions',
 		examples: [
-			'pkg:vscode/ms-python/python@2024.0.1',
-			'pkg:vscode/esbenp/prettier-vscode@10.1.0',
-			'pkg:vscode/dbaeumer/vscode-eslint@2.4.2',
+			'pkg:chrome-extension/cjpalhdlnbpafiamejdnhcphjbkeiagm',
+			'pkg:chrome-extension/nkbihfbeogaeaoehlefnkodbefgpgknn@11.16.16',
+			'pkg:chrome-extension/gighmmpiobklfepjocnamgkkbiglidom@6.4.0',
 		],
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		namespace_requirement: 'prohibited',
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		registry_config: {
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			base_url: 'https://chromewebstore.google.com/detail',
+			components: {
+				namespace: false,
+				// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+				version_in_url: false,
+			},
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			reverse_regex: '^https://chromewebstore\\.google\\.com/detail/(?:[^/]+/)?([^/?#]+)',
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			uri_template: 'https://chromewebstore.google.com/detail/{name}',
+		},
 	},
 	// See https://github.com/package-url/purl-spec/pull/673 (merged 2026-01-29).
-	'vscode-extension': vscodeExtensionInfo,
+	'vscode-extension': {
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		default_registry: 'https://marketplace.visualstudio.com',
+		description: 'Visual Studio Code extensions distributed via the VS Code Marketplace or alternative registries like OpenVSX',
+		examples: [
+			'pkg:vscode-extension/ms-python/python@2024.0.1',
+			'pkg:vscode-extension/esbenp/prettier-vscode@10.1.0',
+			'pkg:vscode-extension/dbaeumer/vscode-eslint@2.4.2',
+		],
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		namespace_requirement: 'required',
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		registry_config: {
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			base_url: 'https://marketplace.visualstudio.com/items',
+			components: {
+				namespace: true,
+				// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+				namespace_required: true,
+				// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+				version_in_url: false,
+			},
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			reverse_regex: '^https://marketplace\\.visualstudio\\.com/items\\?itemName=([^./?#]+)\\.([^/?#]+)',
+			// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+			uri_template: 'https://marketplace.visualstudio.com/items?itemName={namespace}.{name}',
+		},
+	},
 };
 
 /** @type {Record<string, import('./types.mjs').PURLTypeRawInfo>} */

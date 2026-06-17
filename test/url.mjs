@@ -126,8 +126,6 @@ test('url function - chrome-extension', (t) => {
 	t.equal(url('pkg:chrome-extension/cjpalhdlnbpafiamejdnhcphjbkeiagm'), 'https://chromewebstore.google.com/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm', 'chrome-extension URL');
 	// Chrome Web Store doesn't support version in URL
 	t.equal(url('pkg:chrome-extension/cjpalhdlnbpafiamejdnhcphjbkeiagm@1.0.0'), 'https://chromewebstore.google.com/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm', 'chrome-extension with version (no version URL)');
-	// `chrome` is a deprecated alias for `chrome-extension`
-	t.equal(url('pkg:chrome/cjpalhdlnbpafiamejdnhcphjbkeiagm'), 'https://chromewebstore.google.com/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm', 'chrome (alias) URL');
 	t.end();
 });
 
@@ -137,8 +135,6 @@ test('url function - vscode-extension', (t) => {
 	const purlNoNs = new PURL({ name: 'python', type: 'vscode-extension' });
 	// vscode-extension namespace is required, but URL generation should still work
 	t.equal(url(purlNoNs), 'https://marketplace.visualstudio.com/items?itemName=.python', 'vscode-extension without namespace');
-	// `vscode` is a deprecated alias for `vscode-extension`
-	t.equal(url('pkg:vscode/ms-python/python'), 'https://marketplace.visualstudio.com/items?itemName=ms-python.python', 'vscode (alias) URL');
 	t.end();
 });
 

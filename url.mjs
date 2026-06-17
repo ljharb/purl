@@ -187,8 +187,6 @@ export const supportedUrlTypes = [
 	'bioconductor',
 	'bitbucket',
 	'cargo',
-	// TODO [semver-major]: remove `chrome` alias; the spec settled on `chrome-extension`.
-	'chrome',
 	'chrome-extension',
 	'clojars',
 	'cocoapods',
@@ -213,7 +211,5 @@ export const supportedUrlTypes = [
 	'pub',
 	'pypi',
 	'swift',
-	// TODO [semver-major]: remove `vscode` alias; the spec settled on `vscode-extension`.
-	'vscode',
 	'vscode-extension',
 ];

@@ -186,7 +186,6 @@ test('types module - requiresNamespace', (t) => {
 	t.ok(requiresNamespace('composer'), 'composer requires namespace');
 	t.ok(requiresNamespace('swift'), 'swift requires namespace');
 	t.ok(requiresNamespace('vscode-extension'), 'vscode-extension requires namespace');
-	t.ok(requiresNamespace('vscode'), 'vscode (alias) requires namespace');
 
 	t.notOk(requiresNamespace('npm'), 'npm does not require namespace');
 	t.notOk(requiresNamespace('gem'), 'gem does not require namespace');
@@ -199,7 +198,6 @@ test('types module - prohibitsNamespace', (t) => {
 	t.ok(prohibitsNamespace('gem'), 'gem prohibits namespace');
 	t.ok(prohibitsNamespace('cran'), 'cran prohibits namespace');
 	t.ok(prohibitsNamespace('chrome-extension'), 'chrome-extension prohibits namespace');
-	t.ok(prohibitsNamespace('chrome'), 'chrome (alias) prohibits namespace');
 
 	t.notOk(prohibitsNamespace('npm'), 'npm does not prohibit namespace');
 	t.notOk(prohibitsNamespace('maven'), 'maven does not prohibit namespace');
@@ -452,8 +450,8 @@ test('types module - checkNamespace', (t) => {
 });
 
 test('types module - comprehensive type coverage', (t) => {
-	// Verify all 41 known types are properly configured
-	t.equal(knownTypes.length, 41, 'exactly 41 known types');
+	// Verify all 39 known types are properly configured
+	t.equal(knownTypes.length, 39, 'exactly 39 known types');
 
 	const expectedTypes = [
 		'alpm',
@@ -462,7 +460,6 @@ test('types module - comprehensive type coverage', (t) => {
 		'bitbucket',
 		'bitnami',
 		'cargo',
-		'chrome',
 		'chrome-extension',
 		'clojars',
 		'cocoapods',
@@ -495,7 +492,6 @@ test('types module - comprehensive type coverage', (t) => {
 		'rpm',
 		'swid',
 		'swift',
-		'vscode',
 		'vscode-extension',
 	];
 
