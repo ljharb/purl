@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.2.0](https://github.com/ljharb/purl/compare/v2.1.0...v2.2.0) - 2026-06-18
+
+### Commits
+
+- [New] add `chrome-extension` and `vscode-extension` types; deprecate `chrome` and `vscode` [`43165bf`](https://github.com/ljharb/purl/commit/43165bf128cbcc1a18492500829c601b76f0e3ac)
+- [Refactor] remove unpublished `chrome` and `vscode` type aliases [`5c7c968`](https://github.com/ljharb/purl/commit/5c7c96842149530d5144a42116ad47d435a82320)
+- [New] add `chrome` type for Chrome Web Store browser extensions [`2f603dc`](https://github.com/ljharb/purl/commit/2f603dcebf1d6b55608a00450ed44e11f5662074)
+- [Deps] update `pargs` [`955c658`](https://github.com/ljharb/purl/commit/955c65857da32901fe1849b33540d392bc22685c)
+- [New] add `vscode` type for Visual Studio Code extensions [`c2e0279`](https://github.com/ljharb/purl/commit/c2e0279fecd8c260492b6ad5c90a1897e0d88191)
+- [actions] update workflows [`9e6b7d4`](https://github.com/ljharb/purl/commit/9e6b7d4f3074271db0cd0b572c91a964a8da1305)
+- [Dev Deps] update `@arethetypeswrong/cli`, `auto-changelog`, `tape` [`63a75c2`](https://github.com/ljharb/purl/commit/63a75c22749df6543315ed34c4a21fcf6470c381)
+- [Dev Deps] update `@ljharb/eslint-config`, `@types/node`, `eslint` [`b8dc0e3`](https://github.com/ljharb/purl/commit/b8dc0e36bec082f25d6107c60d1114508a5b869a)
+- [Dev Deps] update `eslint`, `tape` [`c537c6b`](https://github.com/ljharb/purl/commit/c537c6b0dc80374fc85c78f9a8248d49e07300a5)
+- [Dev Deps] override `yargs` to 17.7.3-candidate.0 (Node 26 require(ESM) fix) [`d0c7940`](https://github.com/ljharb/purl/commit/d0c7940ee378fb42674c558564c36b4d63613b72)
+- [Deps] update `pargs` [`ea210fc`](https://github.com/ljharb/purl/commit/ea210fc8dec99f8f0a849026e5496abeb7e51a02)
+- [readme] fix actions badge [`5ab6c32`](https://github.com/ljharb/purl/commit/5ab6c32fea44225fe0ffa9dcbe5e6cfd488cf318)
+- [Deps] update `pargs` [`0353b5b`](https://github.com/ljharb/purl/commit/0353b5be8a71dc3e253492c5250ecc61dee9a9d4)
+- [Dev Deps] update `@arethetypeswrong/cli` [`16cf0bb`](https://github.com/ljharb/purl/commit/16cf0bb3a5570e67dac55e1baf654c7ba906f48b)
+
 ## [v2.1.0](https://github.com/ljharb/purl/compare/v2.0.0...v2.1.0) - 2026-01-14
 
 ### Commits
