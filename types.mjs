@@ -50,6 +50,20 @@ const additionalTypes = {
 			uri_template: 'https://chromewebstore.google.com/detail/{name}',
 		},
 	},
+	// See https://github.com/package-url/purl-spec/pull/823 (merged 2026-07-22).
+	git: {
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		default_registry: null,
+		description: 'Git-based source packages',
+		examples: [
+			'pkg:git/codeberg.org/forgejo/forgejo@a72d2c07cfca03b55371089de6aa230d8c951fa0#options/locale_readme.md',
+			'pkg:git/cygwin.com/cgit/newlib-cygwin@6d049c54c3314da31d9ffac133a6a2f2dfecaac2',
+			'pkg:git/projects.blender.org/blender/blender.git',
+			'pkg:git/gitlab.gnome.org/GNOME/adwaita-fonts',
+		],
+		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
+		namespace_requirement: 'required',
+	},
 	// See https://github.com/package-url/purl-spec/pull/673 (merged 2026-01-29).
 	'vscode-extension': {
 		// eslint-disable-next-line camelcase -- purl-types.json uses snake_case
