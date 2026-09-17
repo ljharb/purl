@@ -307,7 +307,10 @@ export default class PURL {
 			return null;
 		}
 
-		const { subpath, remainder: r1 } = extractSubpath(purl.slice(4));
+		// per ECMA-427, parsers should accept any slashes following the scheme's colon, such as 'pkg://', and remove them
+		const afterScheme = purl.slice(SCHEME.length + 1).replace(/^\/+/, '');
+
+		const { subpath, remainder: r1 } = extractSubpath(afterScheme);
 		const qualResult = extractQualifiers(r1);
 		if (!qualResult) {
 			return null;

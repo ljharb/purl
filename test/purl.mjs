@@ -168,6 +168,22 @@ test('PURL class', (t) => {
 		st.end();
 	});
 
+	t.test('ignores slashes following the scheme', (st) => {
+		const purl = new PURL('pkg://npm/lodash@4.17.21');
+		st.equal(purl.type, 'npm', 'type is npm');
+		st.equal(purl.name, 'lodash', 'name is lodash');
+		st.equal(purl.version, '4.17.21', 'version is 4.17.21');
+		st.equal(`${purl}`, 'pkg:npm/lodash@4.17.21', 'canonical form drops the slashes');
+
+		const purl2 = new PURL('pkg:///npm/%40babel/core@7.0.0?a=b#lib/fp');
+		st.equal(purl2.namespace, '@babel', 'namespace parsed after multiple slashes');
+		st.equal(purl2.name, 'core', 'name parsed after multiple slashes');
+		st.equal(`${purl2}`, 'pkg:npm/%40babel/core@7.0.0?a=b#lib/fp', 'canonical form drops all of the slashes');
+
+		st.throws(() => new PURL('pkg://'), TypeError, 'throws when the scheme is followed by only slashes');
+		st.end();
+	});
+
 	t.test('parse static method', (st) => {
 		const parsed = PURL.parse('pkg:npm/lodash@4.17.21');
 		st.ok(parsed, 'returns parsed object');
