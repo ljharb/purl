@@ -233,7 +233,7 @@ const result = await validate('pkg:npm/lodash@4.17.21');
 // { valid: true, latestVersion: '4.17.21' }
 
 const result2 = await validate('pkg:npm/nonexistent-package-xyz');
-// { valid: false, error: 'Package "nonexistent-package-xyz" not found on npm', latestVersion: null }
+// { valid: false, error: 'npm package "nonexistent-package-xyz" not found', latestVersion: null }
 
 supportedTypes; // ['npm', 'pypi', 'gem', 'cargo', 'nuget', 'hex', 'maven', 'composer', 'pub', 'hackage', 'cocoapods']
 ```

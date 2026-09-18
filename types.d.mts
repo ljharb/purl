@@ -103,12 +103,12 @@ export const specSource: string;
 export const specLastUpdated: string;
 
 /**
- * List of all known PURL types from the official specification.
+ * List of all known PURL types: the vendored snapshot of the registered type definitions, plus the types this package adds ahead of the snapshot.
  */
 export const knownTypes: readonly string[];
 
 /**
- * Check if a type is a known/official PURL type.
+ * Check if a type is one of the known PURL types.
  * @param type - The type to check
  * @returns True if the type is known
  */
