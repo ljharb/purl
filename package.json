@@ -144,9 +144,11 @@
 	"publishConfig": {
 		"ignore": [
 			".github/workflows",
+			".gitmodules",
 			"test",
 			".attw.json",
 			"eslint.config.mjs",
+			"vendor/package-url/**",
 			"vendor/purl-spec/**",
 			"!vendor/purl-spec/purl-types.json"
 		]
