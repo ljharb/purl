@@ -81,6 +81,29 @@ test('types module - isKnownType', (t) => {
 		st.end();
 	});
 
+	t.test('returns false for `Object.prototype` members', (st) => {
+		// `type in allTypes` reported every inherited member as a type, and `getTypeInfo` then
+		// returned a record with no description and no examples
+		[
+			'__proto__',
+			'constructor',
+			'hasOwnProperty',
+			'isPrototypeOf',
+			'propertyIsEnumerable',
+			'toLocaleString',
+			'toString',
+			'valueOf',
+		].forEach((key) => {
+			st.notOk(isKnownType(key), `${key} is not known`);
+			st.equal(getTypeInfo(key), null, `${key} has no type info`);
+			st.equal(getTypeDescription(key), null, `${key} has no description`);
+			st.equal(getExamples(key), null, `${key} has no examples`);
+			st.notOk(knownTypes.includes(key), `${key} is not in knownTypes`);
+		});
+
+		st.end();
+	});
+
 	t.test('handles non-string input', (st) => {
 		// @ts-expect-error - testing invalid input
 		st.notOk(isKnownType(null), 'null returns false');

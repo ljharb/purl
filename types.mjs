@@ -96,7 +96,11 @@ const additionalTypes = {
 };
 
 /** @type {Record<string, import('./types.mjs').PURLTypeRawInfo>} */
-const allTypes = { ...purlTypesData.types, ...additionalTypes };
+const allTypes = {
+	__proto__: null,
+	...purlTypesData.types,
+	...additionalTypes,
+};
 
 /**
  * The version of the purl-types specification.
