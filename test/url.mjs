@@ -11,6 +11,22 @@ test('url function - npm', (t) => {
 	t.end();
 });
 
+test('url function - components containing replacement patterns', (t) => {
+	// a component was passed to `String.prototype.replace` as the replacement string, so `$&`,
+	// "$'", '$`', and `$$` in it were expanded as replacement patterns rather than inserted
+	t.equal(url('pkg:npm/x%24%26y'), 'https://www.npmjs.com/package/x$&y', '`$&` in a name');
+	t.equal(url('pkg:npm/a%24%27b'), 'https://www.npmjs.com/package/a$\'b', '`$\'` in a name');
+	t.equal(url('pkg:npm/a%24%60b'), 'https://www.npmjs.com/package/a$`b', '"$`" in a name');
+	t.equal(url('pkg:npm/a%24%24b'), 'https://www.npmjs.com/package/a$$b', '`$$` in a name');
+
+	// every substituted component, not just the name
+	t.equal(url('pkg:npm/%40a%24%26/b'), 'https://www.npmjs.com/package/@a$&/b', '`$&` in a namespace');
+	t.equal(url('pkg:npm/lodash@1.0%24%26'), 'https://www.npmjs.com/package/lodash/v/1.0$&', '`$&` in a version');
+	t.equal(url('pkg:pypi/x%24%26y@2.0'), 'https://pypi.org/project/x$&y/2.0/', '`$&` in a name, with a trailing slash template');
+
+	t.end();
+});
+
 test('url function - pypi', (t) => {
 	t.equal(url('pkg:pypi/requests'), 'https://pypi.org/project/requests/', 'pypi package URL');
 	t.equal(url('pkg:pypi/requests@2.28.0'), 'https://pypi.org/project/requests/2.28.0/', 'pypi package with version');

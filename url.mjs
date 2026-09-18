@@ -41,13 +41,13 @@ function generateFromTemplate(config, purl) {
 	}
 
 	let result = template
-		.replace(/\{name\}/g, name)
-		.replace(/\{namespace\}/g, namespace || '');
+		.replace(/\{name\}/g, () => name)
+		.replace(/\{namespace\}/g, () => namespace || '');
 
 	if (hasVersion) {
-		result = result.replace(/\{version\}/g, version);
+		result = result.replace(/\{version\}/g, () => version);
 	} else if (components.default_version) {
-		result = result.replace(/\{version\}/g, components.default_version);
+		result = result.replace(/\{version\}/g, () => components.default_version);
 	}
 
 	return result;
