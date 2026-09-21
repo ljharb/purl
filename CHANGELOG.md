@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.2.1](https://github.com/ljharb/purl/compare/v2.2.0...v2.2.1) - 2026-09-21
+
+### Commits
+
+- [Tests] run the canonical PURL test suite [`38e8cfc`](https://github.com/ljharb/purl/commit/38e8cfc26d660a9a6b692f606acaad0a71dc34ee)
+- [Fix] don't treat `Object.prototype` members as known PURL types [`bb789e9`](https://github.com/ljharb/purl/commit/bb789e92f10e30e050668551708fff04f86aba1c)
+- [Fix] substitute URL template components literally [`cf62116`](https://github.com/ljharb/purl/commit/cf621160d5a31afd7875eb0b24c7b0b7c7628eed)
+- [Fix] accept and strip slashes following the `pkg:` scheme [`968565d`](https://github.com/ljharb/purl/commit/968565d60ec314270a8d23568bbfb100df5d6fb3)
+- [New] add `git` type for generic git repositories [`4ec784e`](https://github.com/ljharb/purl/commit/4ec784e9cfc5a6065c36292a6299664d461dddc1)
+- [Dev Deps] update `@ljharb/eslint-config`, @types/node`, `auto-changelog`, `eslint` [`a3a815f`](https://github.com/ljharb/purl/commit/a3a815fc90959b1581bd94348a0acf3e6490aead)
+- [Docs] correct the `validate` error message and the `knownTypes` description [`c3c9780`](https://github.com/ljharb/purl/commit/c3c9780e5f1275d66f64a916568c2f4dab4bf173)
+- [Dev Deps] update `@arethetypeswrong/cli`, `@types/node`, `eslint` [`79c2a79`](https://github.com/ljharb/purl/commit/79c2a7962b7396345edd5a9fceaa03d6548efb9b)
+- [Dev Deps] update `@arethetypeswrong/cli` [`0f86db2`](https://github.com/ljharb/purl/commit/0f86db249e3fde31ac02a75ef43fd301933abf74)
+- [meta] run `npx dt-clean --setup` [`2482bfc`](https://github.com/ljharb/purl/commit/2482bfca3165d495489ab12e31aa1e4baa5eedd7)
+- [Deps] update `pargs` [`3b1abde`](https://github.com/ljharb/purl/commit/3b1abde05267f013fd36697319be5ff65eae5ba4)
+- [Dev Deps] update `eslint` [`3194605`](https://github.com/ljharb/purl/commit/31946059952b59997fe71ffdfca3605d825af087)
+- [Dev Deps] update `c8` [`7952090`](https://github.com/ljharb/purl/commit/7952090b34f307bd3e2144e99012103f8355ff41)
+
 ## [v2.2.0](https://github.com/ljharb/purl/compare/v2.1.0...v2.2.0) - 2026-06-18
 
 ### Commits
