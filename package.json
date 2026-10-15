@@ -4,78 +4,24 @@
 	"description": "a PURL ( https://tc54.org/purl/ ) parser and serializer",
 	"main": "./index.mjs",
 	"exports": {
-		".": {
-			"types": "./index.d.mts",
-			"default": "./index.mjs"
-		},
-		"./parse": {
-			"types": "./parse.d.mts",
-			"default": "./parse.mjs"
-		},
-		"./stringify": {
-			"types": "./stringify.d.mts",
-			"default": "./stringify.mjs"
-		},
-		"./normalize": {
-			"types": "./normalize.d.mts",
-			"default": "./normalize.mjs"
-		},
-		"./valid": {
-			"types": "./valid.d.mts",
-			"default": "./valid.mjs"
-		},
-		"./type": {
-			"types": "./type.d.mts",
-			"default": "./type.mjs"
-		},
-		"./namespace": {
-			"types": "./namespace.d.mts",
-			"default": "./namespace.mjs"
-		},
-		"./name": {
-			"types": "./name.d.mts",
-			"default": "./name.mjs"
-		},
-		"./version": {
-			"types": "./version.d.mts",
-			"default": "./version.mjs"
-		},
-		"./qualifiers": {
-			"types": "./qualifiers.d.mts",
-			"default": "./qualifiers.mjs"
-		},
-		"./subpath": {
-			"types": "./subpath.d.mts",
-			"default": "./subpath.mjs"
-		},
-		"./eq": {
-			"types": "./eq.d.mts",
-			"default": "./eq.mjs"
-		},
-		"./compare": {
-			"types": "./compare.d.mts",
-			"default": "./compare.mjs"
-		},
-		"./from-npm": {
-			"types": "./from-npm.d.mts",
-			"default": "./from-npm.mjs"
-		},
-		"./purl": {
-			"types": "./purl.d.mts",
-			"default": "./purl.mjs"
-		},
-		"./url": {
-			"types": "./url.d.mts",
-			"default": "./url.mjs"
-		},
-		"./validate": {
-			"types": "./validate.d.mts",
-			"default": "./validate.mjs"
-		},
-		"./types": {
-			"types": "./types.d.mts",
-			"default": "./types.mjs"
-		},
+		".": "./index.mjs",
+		"./parse": "./parse.mjs",
+		"./stringify": "./stringify.mjs",
+		"./normalize": "./normalize.mjs",
+		"./valid": "./valid.mjs",
+		"./type": "./type.mjs",
+		"./namespace": "./namespace.mjs",
+		"./name": "./name.mjs",
+		"./version": "./version.mjs",
+		"./qualifiers": "./qualifiers.mjs",
+		"./subpath": "./subpath.mjs",
+		"./eq": "./eq.mjs",
+		"./compare": "./compare.mjs",
+		"./from-npm": "./from-npm.mjs",
+		"./purl": "./purl.mjs",
+		"./url": "./url.mjs",
+		"./validate": "./validate.mjs",
+		"./types": "./types.mjs",
 		"./package.json": "./package.json"
 	},
 	"bin": "./bin.mjs",
