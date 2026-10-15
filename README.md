@@ -105,8 +105,9 @@ const purl2 = new PURL({
 String(purl2);   // 'pkg:npm/%40babel/core@7.0.0'
 
 // Instance methods
-purl.equals(other);  // boolean
-purl.compare(other); // -1 | 0 | 1
+const other = new PURL('pkg:npm/lodash@4.17.20');
+purl.equals(other);  // false
+purl.compare(other); // 1
 ```
 
 ### `parse(purl)`
