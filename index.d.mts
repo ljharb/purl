@@ -22,6 +22,9 @@ export { default as subpath } from './subpath.mjs';
 // npm-specific helpers
 export { default as fromNPM } from './from-npm.mjs';
 
+// Ecosystem-native names
+export { default as nativeName } from './native-name.mjs';
+
 // Registry functions
 export { default as url } from './url.mjs';
 export {

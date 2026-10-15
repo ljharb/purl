@@ -72,6 +72,7 @@ import {
 	qualifiers,
 	subpath,
 	fromNPM,
+	nativeName,
 	url,
 	validate,
 	validateTypes,
@@ -205,6 +206,47 @@ fromNPM('lodash@4.17.21');    // PURL for pkg:npm/lodash@4.17.21
 fromNPM('@babel/core@7.0.0'); // PURL for pkg:npm/%40babel/core@7.0.0
 fromNPM('lodash@^4.0.0');     // PURL for pkg:npm/lodash (no version for ranges)
 ```
+
+### `nativeName(purl)`
+
+Get a PURL's package name as its own ecosystem writes it: in an install command, a manifest's dependency list, or the registry's package identifier.
+Accepts a PURL string or a `PURL` instance.
+Only the type, namespace, and name are used; the version, qualifiers, and subpath are ignored.
+
+Throws a `TypeError` if the PURL is invalid, including when it is invalid for its type: a namespace the type's [purl-spec definition](https://github.com/package-url/purl-spec/tree/main/types) requires but is missing, or prohibits but is present (eg, `pkg:maven/commons-lang3` with no `groupId`, or `pkg:gem/a/b`), or a namespace or name the ecosystem can not have (eg, an npm namespace that is not an `@scope`).
+Returns `null` if the PURL's type has no single well-defined native package name, or is not one of `knownTypes`.
+
+```js
+import nativeName from 'purl/native-name';
+
+nativeName('pkg:npm/%40babel/core@7.0.0');                // '@babel/core'
+nativeName('pkg:npm/babel/core');                         // throws (an npm namespace must be an `@scope`)
+nativeName('pkg:maven/org.apache.commons/commons-lang3'); // 'org.apache.commons:commons-lang3'
+nativeName('pkg:golang/github.com/gorilla/mux@1.8.0');    // 'github.com/gorilla/mux'
+nativeName('pkg:deb/debian/curl@7.50.3-1?arch=i386');     // 'curl'
+nativeName('pkg:deb/curl');                               // throws (a `deb` namespace, the vendor, is required)
+nativeName('pkg:generic/openssl@1.1.0g');                 // null
+```
+
+The name and namespace are used as written in the PURL; no ecosystem-specific normalization is applied.
+For example, a spec-conformant `pypi` PURL holds the [normalized](https://packaging.python.org/en/latest/specifications/name-normalization/) project name (`typing-extensions`), which may differ from the author's spelling (`typing_extensions`), and an `npm` name is checked with `validate-npm-package-name`'s `validForOldPackages`, so legacy names like `JSONStream` are allowed.
+
+| Native name | Types |
+| --- | --- |
+| `name`; throws with a namespace | bitnami, cargo, chrome-extension, cocoapods, conda, cran, gem, hackage, mlflow, nuget, pub, pypi |
+| `name`; `null` with a namespace, which has no defined meaning for these types | bioconductor, deno, homebrew |
+| `name`; throws without a namespace, which is not part of the name | alpm, apk, deb, qpkg, rpm (the vendor); cpan (the author's PAUSE id; also throws for a legacy `::` module name) |
+| `name`; an optional namespace is ignored | conan (the vendor; user/channel are qualifiers); hex (a private organization) |
+| `namespace/name`; throws without a namespace, or with a multi-segment one | bitbucket, composer, elm, github, huggingface |
+| `namespace/name`, or `name` without a namespace; throws with a multi-segment namespace | clojars |
+| `namespace/name`, or `name` without a namespace; the namespace may contain `/` | docker, luarocks |
+| `namespace/name`; throws without a namespace; the namespace may contain `/` | golang, swift |
+| `namespace:name` (`groupId:artifactId`); throws without a namespace, or with a multi-segment one | maven |
+| `namespace.name` (`publisher.name`); throws without a namespace, or with a multi-segment one | vscode-extension |
+| `@scope/name` or `name`; throws unless valid per `validate-npm-package-name` | npm |
+| always `null` | generic (identified by `download_url`/`vcs_url`), git (identified by its repository URL; throws without a namespace), oci (identified by digest and `repository_url`; throws with a namespace), swid (identified by `tag_id`; the name is a display name) |
+
+A `docker` PURL's `repository_url` qualifier is ignored like any other qualifier, so `pkg:docker/distroless/static?repository_url=gcr.io` yields `distroless/static`, not `gcr.io/distroless/static`.
 
 ### `url(purl)`
 

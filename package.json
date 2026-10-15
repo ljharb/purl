@@ -18,6 +18,7 @@
 		"./eq": "./eq.mjs",
 		"./compare": "./compare.mjs",
 		"./from-npm": "./from-npm.mjs",
+		"./native-name": "./native-name.mjs",
 		"./purl": "./purl.mjs",
 		"./url": "./url.mjs",
 		"./validate": "./validate.mjs",
@@ -59,7 +60,8 @@
 	"homepage": "https://github.com/ljharb/purl#readme",
 	"dependencies": {
 		"npm-package-arg": "^13.0.2",
-		"pargs": "^1.7.0"
+		"pargs": "^1.7.0",
+		"validate-npm-package-name": "^7.0.2"
 	},
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.18.5",
@@ -94,6 +96,7 @@
 			"test",
 			".attw.json",
 			"eslint.config.mjs",
+			"types/",
 			"vendor/package-url/**",
 			"vendor/purl-spec/**",
 			"!vendor/purl-spec/purl-types.json"
