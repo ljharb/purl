@@ -135,6 +135,14 @@ test('CLI - basic parsing (no --check)', async (t) => {
 		st.ok(result.stderr.includes('Missing required <input> argument'), 'missing input error');
 	});
 
+	t.test('unknown option', async (st) => {
+		const result = await runCli(['--bogus', 'lodash']);
+		st.equal(result.code, 1, 'exit code is 1');
+		st.equal(result.stdout, '', 'nothing on stdout');
+		st.ok(result.stderr.includes('Usage: purl'), 'usage text is on stderr');
+		st.ok(result.stderr.includes('Unknown option \'--bogus\''), 'error message is on stderr');
+	});
+
 });
 
 // Tests for --json flag

@@ -42,6 +42,7 @@ const {
 		},
 	},
 	positionals: [{ description: 'An npm package specifier or PURL string', name: 'input' }],
+	usageOnError: 'stderr',
 });
 
 await help();
