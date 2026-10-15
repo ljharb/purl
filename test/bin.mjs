@@ -132,7 +132,20 @@ test('CLI - basic parsing (no --check)', async (t) => {
 	t.test('missing input', async (st) => {
 		const result = await runCli([]);
 		st.equal(result.code, 1, 'exit code is 1');
-		st.ok(result.stderr.includes('Missing required <input> argument'), 'missing input error');
+		st.match(result.stderr, /required/, 'missing input error');
+	});
+
+	t.test('missing input shows usage with a required <input>', async (st) => {
+		const result = await runCli([]);
+		st.equal(result.code, 1, 'exit code is 1');
+		st.equal(result.stdout, '', 'nothing on stdout');
+		st.ok(result.stderr.includes('Usage: purl [options] <input>'), 'usage marks input as required');
+	});
+
+	t.test('--help marks <input> as required', async (st) => {
+		const result = await runCli(['--help']);
+		st.equal(result.code, 0, 'exit code is 0');
+		st.ok(result.stdout.includes('Usage: purl [options] <input>'), 'usage marks input as required');
 	});
 
 	t.test('unknown option', async (st) => {

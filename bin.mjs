@@ -28,6 +28,7 @@ const {
 		],
 		summary: 'purl - Package URL (PURL) parser and converter',
 	},
+	minPositionals: 1,
 	options: {
 		check: {
 			default: false,
@@ -61,18 +62,11 @@ let purl = null;
 /** @type {'purl' | 'npm' | null} */
 let source = null;
 
-// Check for missing input
-if (!input) {
-	console.error(styleText('red', 'Missing required <input> argument'));
-	process.exitCode = 1;
-}
-
 // First, try to parse as a PURL
-const validPurl = input && valid(input);
-if (validPurl) {
+if (valid(input)) {
 	purl = new PURL(input);
 	source = 'purl';
-} else if (input) {
+} else {
 	// Try to parse as an npm specifier
 	try {
 		purl = fromNPM(input);
