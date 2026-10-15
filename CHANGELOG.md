@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.3.0](https://github.com/ljharb/purl/compare/v2.2.1...v2.3.0) - 2026-10-15
+
+### Commits
+
+- [New] add `nativeName`: a PURL's package name as its ecosystem writes it [`8ee7e2e`](https://github.com/ljharb/purl/commit/8ee7e2e1b36b8c49aa59b4bae4286379454bf511)
+- [meta] simplify `exports` [`2be01ed`](https://github.com/ljharb/purl/commit/2be01edce9caca5f8e06ed04641e20b34f87e20b)
+- [Fix] bin: mark `&lt;input&gt;` as required in usage, via `minPositionals` [`d423e04`](https://github.com/ljharb/purl/commit/d423e04aa44b8a0be76bd0c7543c098b44e6ccff)
+- [Dev Deps] update `@ljharb/eslint-config`, `@types/node`, `auto-changelog`, `eslint`, `npmignore`, `tape` [`6694e26`](https://github.com/ljharb/purl/commit/6694e262c4712ba9c1a2f7c027876a02bb84f1d4)
+- [eslint] parse README code blocks as ES modules, with node 22's syntax [`ca3e0ed`](https://github.com/ljharb/purl/commit/ca3e0edd14494538a7e84383818017e6f1e33365)
+- [Fix] bin: send usage text to stderr, not stdout, on errors [`4eb86bf`](https://github.com/ljharb/purl/commit/4eb86bfb0db185b9b6f245cd059532c10b271e9c)
+- [readme] declare `other` in the `PURL` class example, so it runs [`b5c0c35`](https://github.com/ljharb/purl/commit/b5c0c35ff79b5b0319f5d2e8a972ded635444940)
+- [meta] add `evalmd` [`cc7c6b8`](https://github.com/ljharb/purl/commit/cc7c6b84269edead0c7b696c3736774b6af29db5)
+- [meta] init submodules before `evalmd` in `prelint` [`1f4673e`](https://github.com/ljharb/purl/commit/1f4673eabe50cd874e9357f609b7e1c9c46fafd4)
+- [Deps] update `pargs` [`0f2bfe2`](https://github.com/ljharb/purl/commit/0f2bfe2d11b6deeab0320214bcc3decb77c19d3c)
+- [actions] set least-privilege `cache-mode` [`07e4fd5`](https://github.com/ljharb/purl/commit/07e4fd52e1f355c092409334a88f45684c081647)
+
 ## [v2.2.1](https://github.com/ljharb/purl/compare/v2.2.0...v2.2.1) - 2026-09-21
 
 ### Commits
